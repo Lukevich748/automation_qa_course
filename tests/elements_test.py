@@ -3,6 +3,5 @@ from pages.base_page import BasePage
 
 
 def test(driver):
-    page = BasePage(driver, 'https://www.google.ru')
+    page = BasePage(driver, "https://demoqa.com/text-box")
     page.open()
-    time.sleep(3)
