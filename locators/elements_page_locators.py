@@ -49,6 +49,5 @@ class WebTablePageLocators:
     #search area
     SEARCH_INPUT = (By.XPATH, "//input[@id='searchBox']")
 
-    #idit buttons
+    #edit buttons
     DELETE_BUTTON = (By.XPATH, "//span[@title='Delete']")
-    EDIT_BUTTON = (By.XPATH, "//span[@title='Edit']")
