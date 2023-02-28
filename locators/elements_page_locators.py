@@ -30,3 +30,25 @@ class RadioButtonPageLocators:
     IMPRESSIVE_RADIOBUTTON = (By.XPATH, "//label[@for='impressiveRadio']")
     NO_RADIOBUTTON = (By.XPATH, "//label[@for='noRadio']")
     OUTPUT_RESULT = (By.XPATH, "//span[@class='text-success']")
+
+class WebTablePageLocators:
+
+    #registration person form
+    ADD_BUTTON = (By.XPATH, "//button[@id='addNewRecordButton']")
+    FIRSTNAME_INPUT = (By.XPATH, "//input[@id='firstName']")
+    LASTNAME_INPUT = (By.XPATH, "//input[@id='lastName']")
+    EMAIL_INPUT = (By.XPATH, "//input[@id='userEmail']")
+    AGE_INPUT = (By.XPATH, "//input[@id='age']")
+    SALARY_INPUT = (By.XPATH, "//input[@id='salary']")
+    DEPARTMENT_INPUT = (By.XPATH, "//input[@id='department']")
+    SUBMIT = (By.XPATH, "//button[@id='submit']")
+
+    #person info
+    FULL_PEOPLE_LIST = (By.XPATH, "//div[@class='rt-tr-group']")
+
+    #search area
+    SEARCH_INPUT = (By.XPATH, "//input[@id='searchBox']")
+
+    #idit buttons
+    DELETE_BUTTON = (By.XPATH, "//span[@title='Delete']")
+    EDIT_BUTTON = (By.XPATH, "//span[@title='Edit']")
