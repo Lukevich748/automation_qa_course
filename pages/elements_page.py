@@ -1,5 +1,5 @@
 from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, WebTablePageLocators
 from pages.base_page import BasePage
 import random
 
@@ -66,3 +66,41 @@ class RadioButtonPage(BasePage):
 
     def get_output_result(self):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
+
+class WebTablePage(BasePage):
+    locators = WebTablePageLocators()
+
+    def click_add_button(self):
+        add_button = self.element_is_visible(self.locators.ADD_BUTTON)
+        add_button.click()
+
+    def add_new_person(self):
+        person_info = next(generated_person())
+        firstname = person_info.firstname
+        lastname = person_info.lastname
+        email = person_info.email
+        age = person_info.age
+        salary = person_info.salary
+        department = person_info.department
+        self.element_is_visible(self.locators.FIRSTNAME_INPUT).send_keys(firstname)
+        self.element_is_visible(self.locators.LASTNAME_INPUT).send_keys(lastname)
+        self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
+        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+        self.element_is_visible(self.locators.SALARY_INPUT).send_keys(salary)
+        self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
+        self.element_is_visible(self.locators.SUBMIT).click()
+        return [firstname, lastname, str(age), email, str(salary), department]
+
+    def check_add_new_person(self):
+        people_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
+        data = []
+        for item in people_list:
+            data.append(item.text.splitlines())
+        print(data)
+        return data
+
+    def search_some_person(self, key_word):
+        self.element_is_visible(self.locators.SEARCH_INPUT).send_keys(key_word)
+
+    def check_searched_person(self):
+        pass
