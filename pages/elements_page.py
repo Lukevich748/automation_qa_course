@@ -98,9 +98,3 @@ class WebTablePage(BasePage):
             data.append(item.text.splitlines())
         print(data)
         return data
-
-    def search_some_person(self, key_word):
-        self.element_is_visible(self.locators.SEARCH_INPUT).send_keys(key_word)
-
-    def check_searched_person(self):
-        pass

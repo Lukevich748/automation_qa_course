@@ -1,7 +1,6 @@
 import random
 import time
 
-from conftest import driver
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 
 
@@ -53,7 +52,3 @@ class TestElements:
             new_person = web_table_page.add_new_person()
             table_result = web_table_page.check_add_new_person()
             assert new_person in table_result
-
-        def test_web_table_search_person(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
-            web_table_page.open()
