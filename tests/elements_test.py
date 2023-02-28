@@ -1,4 +1,7 @@
-from pages.elements_page import TextBoxPage
+import time
+
+from conftest import driver
+from pages.elements_page import TextBoxPage, CheckBoxPage
 
 
 class TestElements:
@@ -13,3 +16,13 @@ class TestElements:
             assert email == output_email, "The email does not match"
             assert current_address == output_current_address, "The current address does not match"
             assert permanent_address == output_permanent_address, "The permanent address does not match"
+
+    class TestCheckBox:
+        def test_check_box(self, driver):
+            check_box_page = CheckBoxPage(driver, "https://demoqa.com/checkbox")
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random_checkbox()
+            data = check_box_page.get_checked_checkbox()
+            output_data = check_box_page.get_output_result()
+            assert data == output_data
