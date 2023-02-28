@@ -44,12 +44,12 @@ class CheckBoxPage(BasePage):
         checked_item = self.elements_are_present(self.locators.TITLE_ITEM)
         data = []
         for item in checked_item:
-            data.append(item.text.lower())
-        return data
+            data.append(item.text)
+        return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
 
     def get_output_result(self):
         result_list = self.elements_are_present(self.locators.OUTPUT_RESULT)
         output_data = []
         for item in result_list:
-            output_data.append(item.text.lower())
-        return output_data
+            output_data.append(item.text)
+        return str(output_data).replace(' ', '').lower()
