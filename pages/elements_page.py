@@ -96,5 +96,24 @@ class WebTablePage(BasePage):
         data = []
         for item in people_list:
             data.append(item.text.splitlines())
-        print(data)
         return data
+
+    def search_some_person(self, key_word):
+        self.element_is_visible(self.locators.SEARCH_INPUT).send_keys(key_word)
+
+    def check_search_person(self):
+        search_result = self.elements_are_present(self.locators.SEARCH_RESULT)
+        data = []
+        for item in search_result:
+            data.append(item.text)
+        return data[:-1]
+
+    def delete_person(self,key):
+        self.element_is_visible(self.locators.get_delete_button_locator(key)).click()
+
+    def check_delete_person(self):
+        try:
+            self.element_is_visible(self.locators.NO_ROWS_FOUND)
+            return True
+        except:
+            return False
