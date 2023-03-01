@@ -60,3 +60,8 @@ class WebTablePageLocators:
         return delete_button
 
     NO_ROWS_FOUND = (By.XPATH, "//div[@class='rt-noData']")
+
+class ProgressBarPageLocators:
+
+    START_BUTTON = (By.XPATH, "//button[@id='startStopButton']")
+    PROGRESS_BAR = (By.XPATH, "//div[@id='progressBar']//div")

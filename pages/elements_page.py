@@ -1,5 +1,6 @@
 from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, WebTablePageLocators
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
+    WebTablePageLocators, ProgressBarPageLocators
 from pages.base_page import BasePage
 import random
 
@@ -60,12 +61,13 @@ class RadioButtonPage(BasePage):
 
     def click_on_the_radio_button(self, choice):
         choices = {'yes': self.locators.YES_RADIOBUTTON,
-                  'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
-                  'no': self.locators.NO_RADIOBUTTON}
+                   'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
+                   'no': self.locators.NO_RADIOBUTTON}
         self.element_is_visible(choices[choice]).click()
 
     def get_output_result(self):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
+
 
 class WebTablePage(BasePage):
     locators = WebTablePageLocators()
@@ -108,7 +110,7 @@ class WebTablePage(BasePage):
             data.append(item.text)
         return data[:-1]
 
-    def delete_person(self,key):
+    def delete_person(self, key):
         self.element_is_visible(self.locators.get_delete_button_locator(key)).click()
 
     def check_delete_person(self):
@@ -117,3 +119,22 @@ class WebTablePage(BasePage):
             return True
         except:
             return False
+
+
+class ProgressBarPage(BasePage):
+    locators = ProgressBarPageLocators()
+
+    def click_start_button(self, age):
+        start_button = self.element_is_visible(self.locators.START_BUTTON)
+        start_button.click()
+        progress_bar = self.element_is_visible(self.locators.PROGRESS_BAR)
+        while int(progress_bar.get_attribute("aria-valuenow")) < 100:
+            if int(progress_bar.get_attribute("aria-valuenow")) == age:
+                start_button.click()
+                break
+        return int(progress_bar.get_attribute("aria-valuenow"))
+
+    def get_progress_bar_value(self):
+        progress_bar = self.element_is_visible(self.locators.PROGRESS_BAR)
+        progress_bar.get_attribute("aria-valuenow")
+        return int(progress_bar.get_attribute("aria-valuenow"))

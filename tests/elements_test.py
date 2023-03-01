@@ -2,7 +2,7 @@ import random
 import time
 
 from conftest import driver
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ProgressBarPage
 
 
 class TestElements:
@@ -74,3 +74,13 @@ class TestElements:
             web_table_page.delete_person(firstname)
             delete_result = web_table_page.check_delete_person()
             assert  delete_result == True, "The element was not deleted"
+
+    class TestProgressBar:
+
+        def test_progress_bar(self, driver):
+            progress_bar_page = ProgressBarPage(driver, "https://demoqa.com/progress-bar")
+            progress_bar_page.open()
+            input_value = 43
+            progress_bar_page.click_start_button(input_value)
+            output_value = progress_bar_page.get_progress_bar_value()
+            assert input_value == output_value - 1, "Values are not equal"
