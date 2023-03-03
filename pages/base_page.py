@@ -39,3 +39,7 @@ class BasePage:
     def action_right_click(self, element):
         action = ActionChains(self.driver)
         action.context_click(element).perform()
+
+    def accept_alert(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()
