@@ -11,6 +11,7 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
+    # Elements
     def element_is_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
@@ -32,6 +33,7 @@ class BasePage:
     def go_to_element(self, element):
         self.driver.execute_script('arguments[0].scrollIntoView();', element)
 
+    # Mouse
     def action_double_click(self, element):
         action = ActionChains(self.driver)
         action.double_click(element).perform()
@@ -40,6 +42,19 @@ class BasePage:
         action = ActionChains(self.driver)
         action.context_click(element).perform()
 
+    # Alerts
+    def get_alert_text(self):
+        alert = self.driver.switch_to.alert
+        alert_text = alert.text
+        return alert_text
+
     def accept_alert(self):
         alert = self.driver.switch_to.alert
         alert.accept()
+
+    def dismiss_alert(self):
+        alert = self.driver.switch_to.alert
+        alert.dismiss()
+
+    def alert_is_present(self, timeout=10):
+        return wait(self.driver, timeout).until(EC.alert_is_present())
