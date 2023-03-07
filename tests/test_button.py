@@ -1,4 +1,4 @@
-from pages.ButtonsPage import ButtonsPage
+from pages.buttons_page import ButtonsPage
 
 
 def test_buttons(driver):
