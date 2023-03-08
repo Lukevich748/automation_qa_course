@@ -12,6 +12,13 @@ class PracticeFormPage(BasePage):
     GENDER = (By.XPATH, f"//label[@for='gender-radio-{random.randint(1, 3)}']")
     MOBILE = (By.XPATH, "//input[@id='userNumber']")
     DATE = (By.XPATH, "//input[@id='dateOfBirthInput']")
+    DAY_OF_MONTH = (By.XPATH, "//div[@role='option']")
+
+    @staticmethod
+    def get_day_locator(key):
+        xpath = f"//div[text()='{key}']"
+        day = (By.XPATH, xpath)
+        return day
 
     def fill_first_name(self, first_name):
         self.element_is_visible(self.FIRST_NAME).send_keys(first_name)
@@ -30,3 +37,11 @@ class PracticeFormPage(BasePage):
 
     def date_picker(self):
         self.element_is_visible(self.DATE).click()
+        day_of_month = self.elements_are_visible(self.DAY_OF_MONTH)
+        data = []
+        for item in day_of_month:
+            data.append(item.text)
+        return data
+
+    def choose_date(self, day):
+        self.element_is_visible(self.get_day_locator(day)).click()

@@ -1,3 +1,4 @@
+import random
 import time
 
 from generator.generator import generated_person
@@ -17,5 +18,6 @@ def test_practice_form(driver):
     practice_form_page.fill_email(email)
     practice_form_page.click_gender_radio_button()
     practice_form_page.fill_phone_number(phone_number)
-    practice_form_page.date_picker()
-    time.sleep(3)
+    date = practice_form_page.date_picker()
+    day = date[random.randint(0, len(date) - 1)]
+    practice_form_page.choose_date(day)

@@ -6,6 +6,7 @@ class Person:
     full_name: str = None
     firstname: str = None
     lastname: str = None
+    datetime: str = None
     email: str = None
     phone_number: int = None
     age: int = None

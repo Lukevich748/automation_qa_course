@@ -10,6 +10,7 @@ def generated_person():
         full_name=faker_ru.first_name() + " " + faker_ru.last_name() + " " + faker_ru.middle_name(),
         firstname=faker_ru.first_name(),
         lastname=faker_ru.last_name(),
+        datetime=faker_ru.date_between(start_date='-30y', end_date='today').strftime('%d %m %Y'),
         email=faker_ru.email(),
         phone_number=faker_ru.phone_number(),
         age=random.randint(10, 80),
