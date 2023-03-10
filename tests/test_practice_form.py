@@ -32,3 +32,13 @@ def test_practice_form(driver):
     assert email == result[1], "The form has not been filled"
     assert phone_number == result[3], "The form has not been filled"
     assert current_address == result[7], "The form has not been filled"
+
+def test_required_fields(driver):
+    practice_form_page = PracticeFormPage(driver, "https://demoqa.com/automation-practice-form")
+    practice_form_page.open()
+    practice_form_page.remove_footer()
+    practice_form_page.click_submit()
+    practice_form_page.check_first_name_field()
+    assert practice_form_page.check_first_name_field() == "rgb(220, 53, 69)", 'This field is not required'
+    practice_form_page.check_last_name_field()
+    assert practice_form_page.check_last_name_field() == "rgb(220, 53, 69)", 'This field is not required'

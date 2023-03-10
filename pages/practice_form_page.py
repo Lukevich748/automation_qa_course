@@ -1,4 +1,5 @@
 import random
+import time
 
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
@@ -27,6 +28,7 @@ class PracticeFormPage(BasePage):
         day = (By.XPATH, xpath)
         return day
 
+    # fill fields
     def fill_first_name(self, first_name):
         self.element_is_visible(self.FIRST_NAME).send_keys(first_name)
 
@@ -75,3 +77,16 @@ class PracticeFormPage(BasePage):
         result_list = self.elements_are_visible(self.RESULT)
         result = [i.text for i in result_list]
         return result
+
+    # required fields
+    def check_first_name_field(self):
+        time.sleep(0.05)
+        element = self.element_is_visible(self.FIRST_NAME)
+        border_color = element.value_of_css_property("border-color")
+        return border_color
+
+    def check_last_name_field(self):
+        time.sleep(0.05)
+        element = self.element_is_visible(self.LAST_NAME)
+        border_color = element.value_of_css_property("border-color")
+        return border_color
