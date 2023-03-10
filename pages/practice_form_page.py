@@ -1,4 +1,6 @@
 import random
+
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -13,6 +15,11 @@ class PracticeFormPage(BasePage):
     MOBILE = (By.XPATH, "//input[@id='userNumber']")
     DATE = (By.XPATH, "//input[@id='dateOfBirthInput']")
     DAY_OF_MONTH = (By.XPATH, "//div[@role='option']")
+    SUBJECT = (By.XPATH, "//input[@id='subjectsInput']")
+    HOBBIES = (By.XPATH, f"//label[@for='hobbies-checkbox-{random.randint(1, 3)}']")
+    CURRENT_ADDRESS = (By.XPATH, "//textarea[@id='currentAddress']")
+    SUBMIT = (By.XPATH, "//div/button[@id='submit']")
+    RESULT = (By.XPATH, "//td[text()][2]")
 
     @staticmethod
     def get_day_locator(key):
@@ -45,3 +52,26 @@ class PracticeFormPage(BasePage):
 
     def choose_date(self, day):
         self.element_is_visible(self.get_day_locator(day)).click()
+
+    def fill_subjects(self):
+        subject = self.element_is_visible(self.SUBJECT)
+        subject.send_keys("English")
+        subject.send_keys(Keys.RETURN)
+
+    def click_hobbies_check_box(self):
+        self.element_is_visible(self.HOBBIES).click()
+
+    def fill_current_address(self, current_address):
+        self.element_is_visible(self.CURRENT_ADDRESS).send_keys(current_address)
+
+    def remove_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script('document.getElementById("fixedban").style.display="none"')
+
+    def click_submit(self):
+        self.element_is_visible(self.SUBMIT).click()
+
+    def get_result(self):
+        result_list = self.elements_are_visible(self.RESULT)
+        result = [i.text for i in result_list]
+        return result

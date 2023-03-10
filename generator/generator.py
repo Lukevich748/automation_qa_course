@@ -12,7 +12,7 @@ def generated_person():
         lastname=faker_ru.last_name(),
         datetime=faker_ru.date_between(start_date='-30y', end_date='today').strftime('%d %m %Y'),
         email=faker_ru.email(),
-        phone_number=faker_ru.phone_number(),
+        phone_number=faker_ru.numerify(text='##########'),
         age=random.randint(10, 80),
         salary=random.randint(100, 1000),
         department=faker_ru.job(),
